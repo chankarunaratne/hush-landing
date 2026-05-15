@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hush - A beautiful reader mode for Chrome</title>
+
+  <link rel="icon" href="assets/favicon.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="assets/apple-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {}
+      }
+    }
+  </script>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-white text-slate-900 antialiased">
+  <div class="min-h-screen bg-white" style="font-family: 'Inter', sans-serif;">
+
+    <!-- Navigation -->
+    <nav class="w-full py-6 animate-fade-in-up delay-100">
+      <div class="max-w-2xl mx-auto px-6 flex items-center justify-between">
+        <div class="flex items-center space-x-1.5">
+          <img src="assets/hush-logo.png" alt="Hush" class="h-6 w-6">
+          <span class="text-xl font-medium text-slate-800 opacity-60 tracking-tight">Hush</span>
+        </div>
+        <div class="flex items-center space-x-6">
+          <a href="#" class="text-slate-600 hover:text-slate-800 transition-colors text-base">Features</a>
+          <a href="#" class="text-slate-600 hover:text-slate-800 transition-colors text-base">Support</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <main class="pt-16 pb-24">
+      <div class="max-w-2xl mx-auto px-6 text-center">
+        <div class="space-y-8">
+
+          <!-- Large Logo -->
+          <div class="flex justify-center animate-fade-in-up delay-200">
+            <img src="assets/hush-logo.png" alt="Hush" class="h-24 w-24">
+          </div>
+
+          <!-- Main Heading -->
+          <h1
+            class="text-4xl md:text-5xl font-light text-slate-900 leading-tight animate-fade-in-up delay-300"
+            style="font-family: Georgia, serif;"
+          >
+            Beautiful reading,<br>
+            <span class="text-slate-600">without distractions</span>
+          </h1>
+
+          <!-- Description -->
+          <p class="text-lg text-slate-600 leading-relaxed max-w-lg mx-auto animate-fade-in-up delay-400">
+            Transform any webpage into a clean, focused reading experience. Hush removes clutter and creates the
+            perfect environment for deep reading.
+          </p>
+
+          <!-- CTA Button -->
+          <div class="pt-4 animate-fade-in-up delay-500">
+            <a
+              href="https://chromewebstore.google.com/detail/ccpcpcolgkpbcljphckfcfigfbdjknpb?utm_source=item-share-cb"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center justify-center gap-2 h-11 bg-slate-900 hover:bg-slate-800 text-white px-8 py-3 text-base font-medium rounded-lg shadow-sm transition-all duration-200 hover:shadow-md"
+            >
+              <img src="assets/chrome-logo.jpg" alt="Chrome" class="w-5 h-5 rounded-sm object-contain">
+              Add to Chrome for free
+            </a>
+          </div>
+
+          <!-- Subtle note -->
+          <p class="text-sm text-slate-400 pt-2 animate-fade-in-up delay-600">Free &bull; No account required</p>
+        </div>
+      </div>
+    </main>
+
+    <!-- Comparison Section -->
+    <section class="pb-24">
+      <div class="max-w-3xl mx-auto px-6">
+        <h2
+          class="text-2xl md:text-3xl font-light text-slate-900 text-center mb-10 animate-fade-in-up delay-700"
+          style="font-family: Georgia, serif;"
+        >
+          See it in action
+        </h2>
+        <div class="animate-fade-in-up delay-800">
+          <!-- Comparison Slider -->
+          <div
+            id="slider-container"
+            class="relative w-full aspect-[4/3] rounded-xl overflow-hidden cursor-ew-resize select-none shadow-lg border border-slate-200"
+          >
+            <!-- After Image (right side / background) -->
+            <img
+              src="assets/demo-after.jpg"
+              alt="After using Hush - clean reading experience"
+              class="absolute inset-0 w-full h-full object-cover object-top"
+              draggable="false"
+            >
+
+            <!-- Before Image (clipped left side) -->
+            <div
+              id="before-clip"
+              class="absolute inset-0 overflow-hidden"
+              style="clip-path: inset(0 50% 0 0);"
+            >
+              <img
+                src="assets/demo-before.jpg"
+                alt="Before using Hush - cluttered webpage"
+                class="absolute inset-0 w-full h-full object-cover object-top"
+                draggable="false"
+              >
+            </div>
+
+            <!-- Slider Handle -->
+            <div
+              id="slider-handle"
+              class="absolute top-0 bottom-0 w-1 bg-white shadow-lg cursor-ew-resize"
+              style="left: 50%; transform: translateX(-50%);"
+            >
+              <!-- Handle Circle -->
+              <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center border border-slate-200">
+                <div class="flex items-center gap-0.5">
+                  <svg class="w-3 h-3 text-slate-400" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M15 19l-7-7 7-7" />
+                  </svg>
+                  <svg class="w-3 h-3 text-slate-400" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <!-- Labels -->
+            <div class="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-full text-sm font-medium text-slate-700">
+              Before
+            </div>
+            <div class="absolute bottom-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-full text-sm font-medium text-slate-700">
+              After
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="pb-24">
+      <div class="max-w-3xl mx-auto px-6">
+        <div class="text-center mb-14">
+          <h2
+            class="text-2xl md:text-3xl font-light text-slate-900 mb-4"
+            style="font-family: Georgia, serif;"
+          >
+            Why you'll love Hush
+          </h2>
+          <p class="text-slate-600 text-lg">
+            Simple tools for a better reading experience
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- Feature 1 -->
+          <div class="flex gap-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-slate-100 flex items-center justify-center">
+              <i data-lucide="sparkles" class="w-5 h-5 text-slate-600"></i>
+            </div>
+            <div>
+              <h3 class="font-medium text-slate-900 mb-1">Distraction-free reading</h3>
+              <p class="text-slate-600 text-sm leading-relaxed">
+                Strips away ads, sidebars, and popups. Just the article.
+              </p>
+            </div>
+          </div>
+
+          <!-- Feature 2 -->
+          <div class="flex gap-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-slate-100 flex items-center justify-center">
+              <i data-lucide="palette" class="w-5 h-5 text-slate-600"></i>
+            </div>
+            <div>
+              <h3 class="font-medium text-slate-900 mb-1">Beautiful design</h3>
+              <p class="text-slate-600 text-sm leading-relaxed">
+                Clean, readable text with comfortable spacing and rhythm.
+              </p>
+            </div>
+          </div>
+
+          <!-- Feature 3 -->
+          <div class="flex gap-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-slate-100 flex items-center justify-center">
+              <i data-lucide="sun" class="w-5 h-5 text-slate-600"></i>
+            </div>
+            <div>
+              <h3 class="font-medium text-slate-900 mb-1">Light, dark and sepia mode</h3>
+              <p class="text-slate-600 text-sm leading-relaxed">
+                Easy on your eyes in the style you like.
+              </p>
+            </div>
+          </div>
+
+          <!-- Feature 4 -->
+          <div class="flex gap-4">
+            <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-slate-100 flex items-center justify-center">
+              <i data-lucide="globe" class="w-5 h-5 text-slate-600"></i>
+            </div>
+            <div>
+              <h3 class="font-medium text-slate-900 mb-1">Works everywhere</h3>
+              <p class="text-slate-600 text-sm leading-relaxed">
+                News sites, blogs, essays — Hush handles them all.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonial Section -->
+    <section class="pb-24">
+      <div class="max-w-2xl mx-auto px-6">
+        <div class="text-center mb-12">
+          <h2
+            class="text-2xl md:text-3xl font-light text-slate-900 mb-4"
+            style="font-family: Georgia, serif;"
+          >
+            Our users love it
+          </h2>
+          <p class="text-slate-600 text-lg">
+            Over 600 users actively use Hush everyday to clean up their articles
+          </p>
+        </div>
+
+        <div class="bg-slate-50 rounded-2xl p-8 md:p-10">
+          <!-- Stars -->
+          <div class="flex justify-center gap-1 mb-6">
+            <i data-lucide="star" class="w-5 h-5 fill-amber-400 text-amber-400"></i>
+            <i data-lucide="star" class="w-5 h-5 fill-amber-400 text-amber-400"></i>
+            <i data-lucide="star" class="w-5 h-5 fill-amber-400 text-amber-400"></i>
+            <i data-lucide="star" class="w-5 h-5 fill-amber-400 text-amber-400"></i>
+            <i data-lucide="star" class="w-5 h-5 fill-amber-400 text-amber-400"></i>
+          </div>
+
+          <!-- Quote -->
+          <blockquote
+            class="text-xl md:text-2xl text-slate-700 text-center font-light leading-relaxed mb-8"
+            style="font-family: Georgia, serif;"
+          >
+            &ldquo;That's really great, and I love how simple it is! Adding different themes and font size options would make it absolutely perfect.&rdquo;
+          </blockquote>
+
+          <!-- Author -->
+          <div class="flex items-center justify-center gap-3">
+            <img
+              src="assets/nicolas.jpg"
+              alt="Nicolas Hernandez"
+              class="w-12 h-12 rounded-full object-cover"
+            >
+            <div class="text-left">
+              <p class="font-medium text-slate-900">Nicolas Hernandez</p>
+              <p class="text-sm text-slate-500">Hush user</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="pb-24">
+      <div class="max-w-2xl mx-auto px-6 text-center">
+        <div class="bg-slate-900 rounded-2xl p-10 md:p-14">
+          <h2
+            class="text-2xl md:text-3xl font-light text-white mb-4"
+            style="font-family: Georgia, serif;"
+          >
+            Ready for calm reading?
+          </h2>
+          <p class="text-slate-400 text-lg mb-8">
+            Join thousands of readers who've found their focus with Hush.
+          </p>
+          <button class="inline-flex items-center justify-center gap-2 h-11 bg-white hover:bg-slate-100 text-slate-900 px-8 py-3 text-base font-medium rounded-lg shadow-sm transition-all duration-200 hover:shadow-md">
+            <i data-lucide="chrome" class="w-4 h-4"></i>
+            Add to Chrome &mdash; it's free
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-10 border-t border-slate-100">
+      <div class="max-w-2xl mx-auto px-6">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+          <div class="flex items-center space-x-1.5">
+            <img src="assets/hush-logo.png" alt="Hush" class="h-5 w-5">
+            <span class="text-sm text-slate-500">Hush</span>
+          </div>
+          <div class="flex items-center gap-6 text-sm text-slate-500">
+            <a href="#" class="hover:text-slate-700 transition-colors">Privacy</a>
+            <a href="#" class="hover:text-slate-700 transition-colors">Support</a>
+            <span>&copy; 2024</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script>
+    lucide.createIcons();
+  </script>
+
+  <!-- Comparison Slider -->
+  <script>
+    (function() {
+      var container = document.getElementById('slider-container');
+      var beforeClip = document.getElementById('before-clip');
+      var sliderHandle = document.getElementById('slider-handle');
+      var dragging = false;
+
+      function updateSlider(clientX) {
+        var rect = container.getBoundingClientRect();
+        var pct = Math.max(0, Math.min(100, ((clientX - rect.left) / rect.width) * 100));
+        beforeClip.style.clipPath = 'inset(0 ' + (100 - pct) + '% 0 0)';
+        sliderHandle.style.left = pct + '%';
+      }
+
+      sliderHandle.addEventListener('mousedown', function() { dragging = true; });
+      sliderHandle.addEventListener('touchstart', function() { dragging = true; });
+
+      window.addEventListener('mouseup', function() { dragging = false; });
+      window.addEventListener('mouseleave', function() { dragging = false; });
+
+      container.addEventListener('mousemove', function(e) {
+        if (!dragging) return;
+        updateSlider(e.clientX);
+      });
+
+      container.addEventListener('touchmove', function(e) {
+        updateSlider(e.touches[0].clientX);
+      });
+
+      container.addEventListener('touchend', function() { dragging = false; });
+    })();
+  </script>
+</body>
+</html>
