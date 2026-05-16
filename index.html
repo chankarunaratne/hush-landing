@@ -35,6 +35,7 @@
         </div>
         <div class="flex items-center space-x-6">
           <a href="#features" class="text-slate-600 hover:text-slate-800 transition-colors text-base">Features</a>
+          <a href="privacy.html" class="text-slate-600 hover:text-slate-800 transition-colors text-base">Privacy</a>
           <a href="#" class="text-slate-600 hover:text-slate-800 transition-colors text-base">Support</a>
         </div>
       </div>
@@ -305,7 +306,7 @@
             <span class="text-sm text-slate-500">Hush</span>
           </div>
           <div class="flex items-center gap-6 text-sm text-slate-500">
-            <a href="#" class="hover:text-slate-700 transition-colors">Privacy</a>
+            <a href="privacy.html" class="hover:text-slate-700 transition-colors">Privacy</a>
             <a href="#" class="hover:text-slate-700 transition-colors">Support</a>
             <span>&copy; 2026</span>
           </div>
@@ -352,6 +353,56 @@
       });
 
       container.addEventListener('touchend', function() { dragging = false; });
+    })();
+  </script>
+
+  <!-- Smooth scroll to Features (keeps plain loads snapped to top) -->
+  <script>
+    (function() {
+      var features = document.getElementById('features');
+      /** Padding above Features when scrolling via navbar click only (viewport breathing room). */
+      var FEATURES_NAV_CLICK_TOP_PADDING = 88;
+
+      function smoothToFeatures() {
+        if (!features) return;
+        features.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+
+      function smoothToFeaturesNavClick() {
+        if (!features) return;
+        var y =
+          features.getBoundingClientRect().top +
+          window.scrollY -
+          FEATURES_NAV_CLICK_TOP_PADDING;
+        window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+      }
+
+      if (window.location.hash !== '#features') {
+        window.scrollTo(0, 0);
+      }
+
+      window.addEventListener('load', function() {
+        if (window.location.hash !== '#features') {
+          window.scrollTo(0, 0);
+        }
+      });
+
+      document.querySelectorAll('a[href="#features"]').forEach(function(link) {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          smoothToFeaturesNavClick();
+          if (history.replaceState) {
+            history.replaceState(null, '', '#features');
+          }
+        });
+      });
+
+      if (window.location.hash === '#features') {
+        window.scrollTo(0, 0);
+        requestAnimationFrame(function() {
+          requestAnimationFrame(smoothToFeatures);
+        });
+      }
     })();
   </script>
 </body>
